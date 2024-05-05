@@ -30,11 +30,36 @@ class ProblemRepository {
 
   async getProblem(id) {
     try {
-        const problem = await Problem.findById(id);
-        if(!problem){
-            throw new NotFound("Problem", id);
-        }
-        return problem;
+      const problem = await Problem.findById(id);
+      if (!problem) {
+        throw new NotFound("Problem", id);
+      }
+      return problem;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
+
+  async updateProblem(id, problemData) {
+    try {
+      const problem = await Problem.findByIdAndUpdate(id, {
+        title: problemData.title,
+        description: problemData.description,
+        testCases: problemData.testCases ? problemData.testCases : [],
+      });
+
+      return problem;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
+
+  async deleteProblem(id) {
+    try {
+      const problem = await Problem.findByIdAndDelete(id);
+      return problem;
     } catch (error) {
       console.log(error);
       throw error;
