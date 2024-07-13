@@ -6,7 +6,7 @@ const { StatusCodes } = require("http-status-codes");
 const problemService = new ProblemService(new ProblemRepository());
 
 function pingProblemController(req, res) {
-  return res.json({ message: "Ping controller is up" });
+  return res.status(200).json({ message: "Ping controller is up" });
 }
 
 async function addProblem(req, res, next) {
